@@ -1,7 +1,5 @@
 package com.mocyx.javacc.printer;
 
-import com.mocyx.javacc.MockConsoleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,8 +12,6 @@ import java.util.concurrent.Semaphore;
 @Component
 public class SemaphorePrinter implements Printer {
 
-    @Autowired
-    private MockConsoleService consoleService;
 
 
     class Worker implements Runnable {
@@ -37,7 +33,7 @@ public class SemaphorePrinter implements Printer {
             for (int i = 0; i < count; i++) {
                 try {
                     curSemphore.acquire(1);
-                    consoleService.print(pstr);
+                    System.out.print(pstr);
                     nextSemphore.release(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

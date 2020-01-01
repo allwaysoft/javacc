@@ -1,7 +1,5 @@
 package com.mocyx.javacc.printer;
 
-import com.mocyx.javacc.MockConsoleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -17,8 +15,6 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 @Component
 public class SignalPrinter implements Printer {
-    @Autowired
-    private MockConsoleService consoleService;
     private final Lock lock = new ReentrantLock();
     private volatile int counter = 0;
 
@@ -57,7 +53,7 @@ public class SignalPrinter implements Printer {
                         }
                     }
                     if (counter < max) {
-                        consoleService.print(pstr);
+                        System.out.print(pstr);
                     }
                     counter += 1;
                     nextCondition.signalAll();

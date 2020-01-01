@@ -1,8 +1,5 @@
 package com.mocyx.javacc.printer;
 
-import com.mocyx.javacc.MockConsoleService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +11,8 @@ import java.util.concurrent.BlockingQueue;
  *
  * @author Administrator
  */
-@Component
 public class QueuePrinter implements Printer {
 
-    @Autowired
-    private MockConsoleService consoleService;
 
     static class Msg {
         public static final Msg PRINT_SUCCESS = new Msg();
@@ -47,7 +41,7 @@ public class QueuePrinter implements Printer {
                 try {
                     Msg msg = inChannel.inQueue.take();
                     if (msg == Msg.PRINT) {
-                        consoleService.print(pstr);
+                        System.out.print(pstr);
                         inChannel.outQueue.put(Msg.PRINT_SUCCESS);
                     } else if (msg == Msg.QUIT) {
                         return;

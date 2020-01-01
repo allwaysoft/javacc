@@ -1,7 +1,5 @@
 package com.mocyx.javacc.printer;
 
-import com.mocyx.javacc.MockConsoleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -16,8 +14,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class PollingPrinter implements Printer {
 
     private final AtomicInteger atomicInteger = new AtomicInteger(0);
-    @Autowired
-    private MockConsoleService consoleService;
 
     class Worker implements Runnable {
 
@@ -41,7 +37,7 @@ public class PollingPrinter implements Printer {
                     return;
                 } else {
                     if (v % gap == index) {
-                        consoleService.print(pstr);
+                        System.out.print(pstr);
                         atomicInteger.set(v + 1);
                     }
                 }
